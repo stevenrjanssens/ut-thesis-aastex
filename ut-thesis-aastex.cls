@@ -271,6 +271,9 @@
 %% To set/change line spacing.
 \RequirePackage{setspace}
 
+\usepackage{hyperref}
+\usepackage{natbib}
+
 
 %%%%%%%%%%%%          MAIN  CODE          %%%%%%%%%%%%
 
