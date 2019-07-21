@@ -150,7 +150,7 @@
 \newcommand*{\utthesisupdated}{2012/06/01} % date of last change(s)
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01] % robust macros with * form
-\ProvidesClass{ut-thesis}[\utthesisupdated\space\utthesisversion\space
+\ProvidesClass{ut-thesis-aastex}[\utthesisupdated\space\utthesisversion\space
    graduate theses at the University of Toronto]
 
 
