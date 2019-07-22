@@ -273,6 +273,9 @@
 
 \usepackage{hyperref}
 \usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
 
 
 %%%%%%%%%%%%          MAIN  CODE          %%%%%%%%%%%%
@@ -499,7 +502,214 @@
 %% Default page style.
 \pagestyle{thesis}
 
-%%%%%%    Journals
+%% Commands from aastex.cls:
+
+% This has been redefined below
+%\newcommand\dataset{\@testopt\@dataset{[}}%
+%\def\@dataset[#1]#2{#2}%
+
+\newcommand\facility{\@testopt\@facility{[}}%
+\def\@facility[#1]#2{{\vskip6pt{\large\it Facility:} #2}}%
+
+\newcommand\facilities{\@testopt\@facilities{[}}%
+\def\@facilities[#1]#2{{\vskip6pt{\large\it Facilities:} #2}}%
+
+
+\long\def\software{\bgroup\@testopt \@software {[}}
+\def\@software[#1]#2{\vskip 6pt{
+\frenchspacing
+\iftwelvepoint
+\font\foo=cmr12
+\else
+\font\foo=cmr10\fi
+%%
+\fontdimen2\foo=3pt %% Changed from 1.5pt to 3pt, March12, 2019
+%%
+{\large \it Software: }
+#2
+%% returning to original fontdimen
+\iftwelvepoint
+\fontdimen2\foo=3.91663pt
+\else
+\fontdimen2\foo=3.33333pt
+\fi
+}\egroup}
+
+
+
+
+
+\newcommand\object{\@testopt\@object{[}}%
+\def\@object[#1]#2{#2}%
+\newcommand\objectname{\@testopt\@objectname{[]}}% 
+\def\@objectname[#1]#2{#2}% 
+\newlength{\plot@width}
+\def\eps@scaling{1.0}% 
+\newcommand\epsscale[1]{\def\eps@scaling{#1}}% 
+\newcommand\plotone[1]{% 
+ \centering 
+ \leavevmode 
+ \setlength{\plot@width}{0.85\linewidth}
+ \includegraphics[width={\eps@scaling\plot@width}]{#1}% 
+}% 
+\newcommand\plottwo[2]{% 
+ \centering 
+ \leavevmode 
+ \setlength{\plot@width}{0.425\linewidth}
+ \includegraphics[width={\eps@scaling\plot@width}]{#1}% 
+ \hfil 
+ \includegraphics[width={\eps@scaling\plot@width}]{#2}% 
+}% 
+\newcommand\plotfiddle[7]{% 
+ \centering 
+ \leavevmode 
+ \vbox\@to#2{\rule{\z@}{#2}}% 
+ \includegraphics[% 
+  scale=#4, 
+  angle=#3, 
+  origin=c 
+ ]{#1}% 
+}% 
+\newcommand\figurenum[1]{% 
+ \def\thefigure{#1}% 
+ \let\@currentlabel\thefigure 
+ \addtocounter{figure}{\m@ne}% 
+}% 
+
+\newcommand\phn{\phantom{0}}% 
+\newcommand\phd{\phantom{.}}% 
+\newcommand\phs{\phantom{$-$}}% 
+\newcommand\phm[1]{\phantom{#1}}% 
+\let\la=\lesssim            % For Springer A&A compliance... 
+\let\ga=\gtrsim 
+\newcommand\sq{\mbox{\rlap{$\sqcap$}$\sqcup$}}% 
+\newcommand\arcdeg{\mbox{$^\circ$}}% 
+\newcommand\arcmin{\mbox{$^\prime$}}% 
+\newcommand\arcsec{\mbox{$^{\prime\prime}$}}% 
+\newcommand\fd{\mbox{$.\!\!^{\mathrm d}$}}% 
+\newcommand\fh{\mbox{$.\!\!^{\mathrm h}$}}% 
+\newcommand\fm{\mbox{$.\!\!^{\mathrm m}$}}% 
+\newcommand\fs{\mbox{$.\!\!^{\mathrm s}$}}% 
+\newcommand\fdg{\mbox{$.\!\!^\circ$}}% 
+\newcommand\farcm@mss{\mbox{$.\mkern-4mu^\prime$}}% 
+\let\farcm\farcm@mss 
+\newcommand\farcs@mss{\mbox{$.\!\!^{\prime\prime}$}}% 
+\let\farcs\farcs@mss 
+\newcommand\fp{\mbox{$.\!\!^{\scriptscriptstyle\mathrm p}$}}% 
+\newcommand\micron{\mbox{$\mu$m}}% 
+\def\farcm@apj{% 
+ \mbox{.\kern -0.7ex\raisebox{.9ex}{\scriptsize$\prime$}}% 
+}% 
+\def\farcs@apj{% 
+ \mbox{% 
+  \kern  0.13ex.% 
+  \kern -0.95ex\raisebox{.9ex}{\scriptsize$\prime\prime$}% 
+  \kern -0.1ex% 
+ }% 
+}% 
+ 
+
+\newcommand\ion[2]{#1$\;${%
+\ifx\@currsize\normalsize\small \else
+\ifx\@currsize\small\footnotesize \else
+\ifx\@currsize\footnotesize\scriptsize \else
+\ifx\@currsize\scriptsize\tiny \else
+\ifx\@currsize\large\normalsize \else
+\ifx\@currsize\Large\large
+\fi\fi\fi\fi\fi\fi
+\rmfamily\@Roman{#2}}\relax}% 
+
+\newcommand\case[2]{\mbox{$\frac{#1}{#2}$}}% 
+\newcommand\slantfrac{\case}% 
+\newcommand\onehalf{\slantfrac{1}{2}}% 
+\newcommand\onethird{\slantfrac{1}{3}}% 
+\newcommand\twothirds{\slantfrac{2}{3}}% 
+\newcommand\onequarter{\slantfrac{1}{4}}% 
+\newcommand\threequarters{\slantfrac{3}{4}}% 
+\newcommand\ubvr{\mbox{$U\!BV\!R$}}%% UBVR system 
+\newcommand\ub{\mbox{$U\!-\!B$}}%   % U-B 
+\newcommand\bv{\mbox{$B\!-\!V$}}%   % B-V 
+\newcommand\vr{\mbox{$V\!-\!R$}}%   % V-R 
+\newcommand\ur{\mbox{$U\!-\!R$}}%   % U-R 
+
+%% need this change so that it works correctly in tables:
+{\catcode`\$=\active
+\gdef\nodata{ ~$\cdots$~ }}% 
+
+\newcommand\diameter{\ooalign{\hfil/\hfil\crcr\mathhexbox20D}}% 
+\newcommand\degr{\arcdeg}% 
+\newcommand\Sun{\sun}% 
+\newcommand\Sol{\sun}% 
+\newcommand\sun{\odot}% 
+\newcommand\Mercury{\astro{\char1}}% Mercury symbol, "1" 
+\newcommand\Venus{\astro{\char2}}% Venus symbol, "2" 
+\newcommand\Earth{\earth}% 
+\newcommand\Terra{\earth}% 
+\newcommand\earth{\oplus}% 
+\newcommand\Mars{\astro{\char4}}% Mars symbol, "4" 
+\newcommand\Jupiter{\astro{\char5}}% Jupiter symbol, "5" 
+\newcommand\Saturn{\astro{\char6}}% Saturn symbol, "6" 
+\newcommand\Uranus{\astro{\char7}}% Uranus symbol, "7" 
+\newcommand\Neptune{\astro{\char8}}% Neptune symbol, "8" 
+\newcommand\Pluto{\astro{\char9}}% Pluo symbol, "9" 
+\newcommand\Moon{\astro{\char10}}% Moon symbol, "M" 
+\newcommand\Luna{\Moon}% 
+\newcommand\Aries{\astro{\char11}}% 
+\newcommand\VEq{\Aries}% vernal equinox (Aries) 
+\newcommand\Taurus{\astro{\char12}}% 
+\newcommand\Gemini{\astro{\char13}}% 
+\newcommand\Cancer{\astro{\char14}}% 
+\newcommand\Leo{\astro{\char15}}% 
+\newcommand\Virgo{\astro{\char16}}% 
+\newcommand\Libra{\astro{\char17}}% 
+\newcommand\AEq{\Libra}% autumnal equinox (Libra) 
+\newcommand\Scorpius{\astro{\char18}}% 
+\newcommand\Sagittarius{\astro{\char19}}% 
+\newcommand\Capricornus{\astro{\char20}}% 
+\newcommand\Aquarius{\astro{\char21}}% 
+\newcommand\Pisces{\astro{\char22}}% 
+ 
+
+\newcommand\sbond{\chem@bnd{\@sbnd}}%
+\newcommand\dbond{\chem@bnd{\@dbnd}}%
+\newcommand\tbond{\chem@bnd{\@tbnd}}%
+\def\chem@bnd#1{%
+ {%
+  \kern.1em\relax
+  \setbox\z@\hbox{M}%
+  \dimen@ii.8em\relax
+  \p@=.1em\relax
+  \dimen@.5\ht\z@\dimen@i-\dimen@
+  \advance\dimen@1.5\p@\advance\dimen@i-1.0\p@
+  #1%
+  \kern.1em\relax
+  }%
+ }%
+\def\@sbnd{%
+ \advance\dimen@-1.5\p@\advance\dimen@i1.5\p@
+ \vrule\@height\dimen@\@depth\dimen@i\@width\dimen@ii\nobreak
+ }%
+\def\@dbnd{%
+ \advance\dimen@-0.5\p@\advance\dimen@i0.5\p@
+ \vrule\@height\dimen@\@depth\dimen@i\@width\dimen@ii\nobreak
+ \advance\dimen@-1.5\p@\advance\dimen@i1.5\p@
+ \hskip-\dimen@ii
+ \vrule\@height\dimen@\@depth\dimen@i\@width\dimen@ii\nobreak
+ }%
+\def\@tbnd{%
+ \vrule\@height\dimen@\@depth\dimen@i\@width\dimen@ii\nobreak
+ \advance\dimen@-1.5\p@\advance\dimen@i1.5\p@
+ \hskip-\dimen@ii
+ \vrule\@height\dimen@\@depth\dimen@i\@width\dimen@ii\nobreak
+ \advance\dimen@-1.5\p@\advance\dimen@i1.5\p@
+ \hskip-\dimen@ii
+ \vrule\@height\dimen@\@depth\dimen@i\@width\dimen@ii\nobreak
+ }%
+
+%\newcommand\anchor[2]{#2}% 
+%\renewcommand\url{\@dblarg\@url}% 
+%\def\@url[#1]{\anchor{#1}}% 
+
 
 \let\jnl@style=\rmfamily 
 \def\ref@jnl#1{{\jnl@style#1}}% 
