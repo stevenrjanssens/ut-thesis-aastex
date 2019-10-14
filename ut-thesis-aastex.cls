@@ -271,7 +271,7 @@
 %% To set/change line spacing.
 \RequirePackage{setspace}
 
-\usepackage{hyperref}
+\usepackage[breaklinks,colorlinks,citecolor=blue]{hyperref}
 \usepackage{natbib}
 \usepackage{graphicx}
 \usepackage{amsmath}
